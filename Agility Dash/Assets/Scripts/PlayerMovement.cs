@@ -5,7 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-
+    [Header("Camera")]
+    public GameObject camHolder;
+    public float sensX;
+    public float sensY;
+    float xRotation;
+    float yRotation;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -37,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -66,6 +73,20 @@ public class PlayerMovement : MonoBehaviour
 
     void MyInput() 
     {
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+
+        yRotation += mouseX;
+        xRotation -= mouseY;
+
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        //rotate cam and orientation
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 

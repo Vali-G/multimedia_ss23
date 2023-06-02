@@ -347,7 +347,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -467,13 +467,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829872625}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.77, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5470991, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 915979205}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1865324126}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &829872628
@@ -500,7 +500,6 @@ GameObject:
   - component: {fileID: 915979205}
   - component: {fileID: 915979208}
   - component: {fileID: 915979207}
-  - component: {fileID: 915979206}
   m_Layer: 0
   m_Name: TestCamera
   m_TagString: Untagged
@@ -523,21 +522,6 @@ Transform:
   m_Father: {fileID: 829872627}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &915979206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915979204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1edcc01c98a4f4b4c9504942f4310b30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
-  orientation: {fileID: 13450369}
 --- !u!81 &915979207
 AudioListener:
   m_ObjectHideFlags: 0
@@ -768,6 +752,7 @@ Transform:
   - {fileID: 133415994}
   - {fileID: 13450369}
   - {fileID: 1837423660}
+  - {fileID: 829872627}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -783,6 +768,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cf54d1bfde283468c1816ac9c1ebc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camHolder: {fileID: 829872625}
+  sensX: 400
+  sensY: 400
   moveSpeed: 7
   groundDrag: 5
   jumpForce: 12
