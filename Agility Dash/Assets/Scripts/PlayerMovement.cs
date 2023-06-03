@@ -81,9 +81,6 @@ public class PlayerMovement : MonoBehaviour
 
     void MyInput() 
     {
-        //float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        //float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
         float mouseX = _playerInput.actions["Look"].ReadValue<Vector2>().x * Time.deltaTime * sensX;
         float mouseY = _playerInput.actions["Look"].ReadValue<Vector2>().y * Time.deltaTime * sensY;
 
@@ -94,8 +91,10 @@ public class PlayerMovement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        camHolder.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        transform.rotation = Quaternion.Euler(0, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        
 
 
         horizontalInput = _playerInput.actions["Move"].ReadValue<Vector2>().x;
