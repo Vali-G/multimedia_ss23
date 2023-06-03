@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    [SerializeField] PlayerInput _playerInput;
 
     [Header("Camera")]
     public GameObject camHolder;
@@ -39,6 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    void OnValidate()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,8 +81,12 @@ public class PlayerMovement : MonoBehaviour
 
     void MyInput() 
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        //float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        //float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+
+        float mouseX = _playerInput.actions["Look"].ReadValue<Vector2>().x * Time.deltaTime * sensX;
+        float mouseY = _playerInput.actions["Look"].ReadValue<Vector2>().y * Time.deltaTime * sensY;
+
 
         yRotation += mouseX;
         xRotation -= mouseY;
@@ -86,12 +98,12 @@ public class PlayerMovement : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
 
-
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = _playerInput.actions["Move"].ReadValue<Vector2>().x;
+        verticalInput = _playerInput.actions["Move"].ReadValue<Vector2>().y;
+        bool jump = _playerInput.actions["Jump"].WasPressedThisFrame();
 
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(jump && readyToJump && grounded)
         {
             readyToJump = false;
 
