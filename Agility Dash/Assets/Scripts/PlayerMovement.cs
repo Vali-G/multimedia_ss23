@@ -1,20 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    [SerializeField] PlayerInput _playerInput;
-
-    [Header("Camera")]
-    public GameObject camHolder;
-    public float sensX;
-    public float sensY;
-    float xRotation;
-    float yRotation;
-
+    
     [Header("Movement")]
     public float moveSpeed;
 
@@ -26,7 +16,9 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump;
 
     [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode jumpKey;
+    [SerializeField] private string inputNameHorizontal;
+    [SerializeField] private string inputNameVertical;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -41,11 +33,6 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
-
-    void OnValidate()
-    {
-        _playerInput = GetComponent<PlayerInput>();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -81,28 +68,11 @@ public class PlayerMovement : MonoBehaviour
 
     void MyInput() 
     {
-        float mouseX = _playerInput.actions["Look"].ReadValue<Vector2>().x * Time.deltaTime * sensX;
-        float mouseY = _playerInput.actions["Look"].ReadValue<Vector2>().y * Time.deltaTime * sensY;
-
-
-        yRotation += mouseX;
-        xRotation -= mouseY;
-
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        //rotate cam and orientation
-        camHolder.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        
-
-
-        horizontalInput = _playerInput.actions["Move"].ReadValue<Vector2>().x;
-        verticalInput = _playerInput.actions["Move"].ReadValue<Vector2>().y;
-        bool jump = _playerInput.actions["Jump"].WasPressedThisFrame();
+        horizontalInput = Input.GetAxisRaw(inputNameHorizontal);
+        verticalInput = Input.GetAxisRaw(inputNameVertical);
 
         // when to jump
-        if(jump && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 

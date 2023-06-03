@@ -6,6 +6,10 @@ public class PlayerCam : MonoBehaviour
 {
 
 
+    [Header("Keybinds")]
+    [SerializeField] private string inputMouseX;
+    [SerializeField] private string inputMouseY;
+
     public float sensX;
     public float sensY;
 
@@ -27,8 +31,8 @@ public class PlayerCam : MonoBehaviour
     void Update()
     {
         //get Mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        float mouseX = Input.GetAxisRaw(inputMouseX) * Time.deltaTime * sensX;
+        float mouseY = Input.GetAxisRaw(inputMouseY) * Time.deltaTime * sensY;
 
         yRotation += mouseX;
         xRotation -= mouseY;
