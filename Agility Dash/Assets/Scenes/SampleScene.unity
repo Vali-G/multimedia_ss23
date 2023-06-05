@@ -488,8 +488,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1091247366}
   - component: {fileID: 1091247365}
-  - component: {fileID: 1091247364}
   - component: {fileID: 1091247363}
+  - component: {fileID: 1091247368}
+  - component: {fileID: 1091247369}
   m_Layer: 6
   m_Name: Player1
   m_TagString: Untagged
@@ -509,38 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58b0dabf35b207498f8d94eeded7f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1091247364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091247362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cf54d1bfde283468c1816ac9c1ebc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 7
-  sprintSpeed: 10
-  groundDrag: 5
-  jumpForce: 12
-  jumpCooldown: 0.25
-  airMultiplier: 0.4
-  crouchSpeed: 3.5
-  crouchYScale: 0.5
-  jumpKey: 32
-  sprintKey: 304
-  crouchKey: 306
-  inputNameHorizontal: Horizontal1
-  inputNameVertical: Vertical1
-  playerHeight: 2
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
-  maxSlopeAngle: 40
-  orientation: {fileID: 1100775165}
-  state: 0
 --- !u!54 &1091247365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -575,6 +544,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1091247368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091247362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2704545ade2501f488bed2e0ed64c946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 7
+  sprintSpeed: 10
+  slideSpeed: 30
+  speedIncreaseMultiplier: 1.5
+  slopeIncreaseMultiplier: 2.5
+  groundDrag: 4
+  jumpForce: 12
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  crouchSpeed: 3.5
+  crouchYScale: 0.5
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
+  inputNameHorizontal: Horizontal1
+  inputNameVertical: Vertical1
+  playerHeight: 2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  maxSlopeAngle: 40
+  orientation: {fileID: 1100775165}
+  state: 0
+  sliding: 0
+--- !u!114 &1091247369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091247362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6bff2a2a7cfd74f80dd328687c93ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1100775165}
+  playerObj: {fileID: 1872658027}
+  inputNameHorizontal: Horizontal1
+  inputNameVertical: Vertical1
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideYScale: 0.5
+  slideKey: 306
 --- !u!1 &1100775164
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,14 +820,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397553792}
-  m_LocalRotation: {x: 0, y: 0, z: 0.3420201, w: 0.9396927}
-  m_LocalPosition: {x: -3.3, y: 2.45, z: -8.87}
-  m_LocalScale: {x: 10, y: 0.2, z: 5}
+  m_LocalRotation: {x: 0, y: 0, z: 0.33380687, w: 0.94264156}
+  m_LocalPosition: {x: 15.69, y: 15.61, z: -8.87}
+  m_LocalScale: {x: 200, y: 0.2, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 40}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 39}
 --- !u!1 &1412265512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,8 +1204,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1767588574}
   - component: {fileID: 1767588573}
-  - component: {fileID: 1767588572}
-  - component: {fileID: 1767588571}
+  - component: {fileID: 1767588576}
+  - component: {fileID: 1767588575}
   m_Layer: 6
   m_Name: Player2
   m_TagString: Untagged
@@ -1188,50 +1213,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1767588571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767588570}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f58b0dabf35b207498f8d94eeded7f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1767588572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767588570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cf54d1bfde283468c1816ac9c1ebc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 7
-  sprintSpeed: 10
-  groundDrag: 5
-  jumpForce: 12
-  jumpCooldown: 0.25
-  airMultiplier: 0.4
-  crouchSpeed: 3.5
-  crouchYScale: 0.5
-  jumpKey: 331
-  sprintKey: 337
-  crouchKey: 332
-  inputNameHorizontal: Horizontal2
-  inputNameVertical: Vertical2
-  playerHeight: 2
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
-  maxSlopeAngle: 40
-  orientation: {fileID: 1070089416}
-  state: 0
 --- !u!54 &1767588573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1266,6 +1247,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1767588575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767588570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6bff2a2a7cfd74f80dd328687c93ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1070089416}
+  playerObj: {fileID: 1465219342}
+  inputNameHorizontal: Horizontal2
+  inputNameVertical: Vertical2
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideYScale: 0.5
+  slideKey: 332
+--- !u!114 &1767588576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767588570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2704545ade2501f488bed2e0ed64c946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 7
+  sprintSpeed: 10
+  slideSpeed: 30
+  speedIncreaseMultiplier: 1.5
+  slopeIncreaseMultiplier: 2.5
+  groundDrag: 4
+  jumpForce: 12
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  crouchSpeed: 3.5
+  crouchYScale: 0.5
+  jumpKey: 331
+  sprintKey: 337
+  crouchKey: 332
+  inputNameHorizontal: Horizontal2
+  inputNameVertical: Vertical2
+  playerHeight: 2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  maxSlopeAngle: 40
+  orientation: {fileID: 1070089416}
+  state: 0
+  sliding: 0
 --- !u!1 &1872658026
 GameObject:
   m_ObjectHideFlags: 0
