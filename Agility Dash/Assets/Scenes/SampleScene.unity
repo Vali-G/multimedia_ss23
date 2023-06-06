@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 74543957}
   - component: {fileID: 74543956}
   - component: {fileID: 74543955}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,6 +591,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 1070089416}
+  camHolder: {fileID: 2134371845}
 --- !u!81 &1002597900
 AudioListener:
   m_ObjectHideFlags: 0
@@ -685,7 +686,7 @@ GameObject:
   - component: {fileID: 1071839015}
   - component: {fileID: 1071839014}
   - component: {fileID: 1071839013}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,15 +915,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   wallRunForce: 200
-  wallClimbSpeed: 5
-  maxWallRunTime: 1.5
-  inputMouseY: Mouse Y
-  sensY: 400
+  wallJumpUpForce: 4
+  wallJumpSideForce: 12
+  wallClimbSpeed: 3
+  maxWallRunTime: 1
+  jumpKey: 32
   inputNameHorizontal: Horizontal1
   inputNameVertical: Vertical1
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  exitWallTime: 0.2
+  useGravity: 1
+  gravityCounterForce: 0
   orientation: {fileID: 1100775165}
+  cam: {fileID: 1412265514}
 --- !u!1 &1100775164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1208,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 1100775165}
+  camHolder: {fileID: 1994694040}
 --- !u!81 &1412265515
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1363,7 +1370,7 @@ GameObject:
   - component: {fileID: 1573717436}
   - component: {fileID: 1573717435}
   - component: {fileID: 1573717434}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1740,20 +1747,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   wallRunForce: 200
+  wallJumpUpForce: 4
+  wallJumpSideForce: 12
   wallClimbSpeed: 5
-  maxWallRunTime: 1.5
-  inputMouseY: MouseCont Y
-  sensY: 400
+  maxWallRunTime: 1
+  jumpKey: 331
   inputNameHorizontal: Horizontal2
   inputNameVertical: Vertical2
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  exitWallTime: 0.5
+  useGravity: 1
+  gravityCounterForce: 0
   orientation: {fileID: 1070089416}
+  cam: {fileID: 1002597899}
 --- !u!1 &1872658026
 GameObject:
   m_ObjectHideFlags: 0
