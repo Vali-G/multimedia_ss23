@@ -10,10 +10,8 @@ public class WallRunning : MonoBehaviour
     public float wallRunForce;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
-    public float wallClimbSpeed;
     public float maxWallRunTime;
     private float wallRunTimer;
-
 
     [Header("Input")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -43,12 +41,14 @@ public class WallRunning : MonoBehaviour
     public Transform orientation;
     public PlayerCam cam;
     private PlayerMovementAdvanced pm;
+    private LedgeGrabbing lg;
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovementAdvanced>();
+        lg = GetComponent<LedgeGrabbing>();
     }
 
     private void Update()
@@ -170,6 +170,8 @@ public class WallRunning : MonoBehaviour
 
     private void WallJump()
     {
+        if (lg.holding || lg.exitingLedge) return;
+
         // enter exiting wall state
         exitingWall = true;
         exitWallTimer = exitWallTime;
