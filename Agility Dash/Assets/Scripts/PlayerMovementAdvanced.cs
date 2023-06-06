@@ -20,6 +20,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
 
+    public float dashSpeed;
+    public float dashSpeedChangeFactor;
+
+    public float maxYSpeed;
+
     public float groundDrag;
 
     [Header("Jumping")]
@@ -74,6 +79,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         vaulting,
         crouching,
         sliding,
+        dashing,
         air
     }
 
@@ -85,6 +91,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     public bool freeze;
     public bool unlimited;
+
+    public bool dashing;
     
     public bool restricted;
 
@@ -108,7 +116,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         StateHandler();
 
         // handle drag
-        if (grounded)
+        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
@@ -152,11 +160,20 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
     }
 
-    bool keepMomentum;
+    private MovementState lastState;
+    private bool keepMomentum;
     private void StateHandler()
     {
+        // Mode - Dashing
+        if (dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+            speedChangeFactor = dashSpeedChangeFactor;
+        }
+
         // Mode - Freeze
-        if (freeze)
+        else if (freeze)
         {
             state = MovementState.freeze;
             rb.velocity = Vector3.zero;
@@ -235,9 +252,15 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
             if (moveSpeed < airMinSpeed)
                 desiredMoveSpeed = airMinSpeed;
+            else if (desiredMoveSpeed < sprintSpeed)
+                desiredMoveSpeed = walkSpeed;
+            else
+                desiredMoveSpeed = sprintSpeed;
         }
 
         bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
+
+        if (lastState == MovementState.dashing) keepMomentum = true;
 
         if (desiredMoveSpeedHasChanged)
         {
@@ -248,22 +271,27 @@ public class PlayerMovementAdvanced : MonoBehaviour
             }
             else
             {
+                StopAllCoroutines();
                 moveSpeed = desiredMoveSpeed;
             }
         }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
+        lastState = state;
 
         // deactivate keepMomentum
         if (Mathf.Abs(desiredMoveSpeed - moveSpeed) < 0.1f) keepMomentum = false;
     }
 
+    private float speedChangeFactor;
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
         // smoothly lerp movementSpeed to desired value
         float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
+
+        float boostFactor = speedChangeFactor;
 
         while (time < difference)
         {
@@ -283,10 +311,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+        speedChangeFactor = 1f;
+        keepMomentum = false;
     }
 
     private void MovePlayer()
     {
+        if (state == MovementState.dashing) return;
         if (climbingScript.exitingWall) return;
         if (restricted) return;
 
@@ -335,6 +366,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
+
+        // limit y vel
+        if (maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
+            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);
     }
 
     private void Jump()

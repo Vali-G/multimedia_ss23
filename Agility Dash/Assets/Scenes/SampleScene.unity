@@ -407,7 +407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74543954}
   m_LocalRotation: {x: -0, y: -0, z: 0.08715578, w: 0.9961947}
-  m_LocalPosition: {x: -2.94, y: 7.3, z: -35.57}
+  m_LocalPosition: {x: -2.94, y: 7.3, z: -34.19}
   m_LocalScale: {x: 20, y: 8, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1364,6 +1364,7 @@ GameObject:
   - component: {fileID: 1091247374}
   - component: {fileID: 1091247373}
   - component: {fileID: 1091247380}
+  - component: {fileID: 1091247381}
   m_Layer: 6
   m_Name: Player1
   m_TagString: Untagged
@@ -1542,6 +1543,9 @@ MonoBehaviour:
   airMinSpeed: 7
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
+  dashSpeed: 15
+  dashSpeedChangeFactor: 20
+  maxYSpeed: 10
   groundDrag: 4
   jumpForce: 12
   jumpCooldown: 0.25
@@ -1569,6 +1573,7 @@ MonoBehaviour:
   vaulting: 0
   freeze: 0
   unlimited: 0
+  dashing: 0
   restricted: 0
 --- !u!114 &1091247380
 MonoBehaviour:
@@ -1582,6 +1587,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58b0dabf35b207498f8d94eeded7f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1091247381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091247362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b2eaf6adc70964689ff422d4044c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1100775165}
+  playerCam: {fileID: 1412265513}
+  dashForce: 15
+  dashUpwardForce: 0
+  maxDashYSpeed: 10
+  dashDuration: 0.5
+  cam: {fileID: 1412265517}
+  dashFov: 95
+  useCameraForward: 1
+  allowAllDirections: 1
+  disableGravity: 1
+  resetVel: 1
+  dashCd: 2
+  dashKey: 101
+  inputNameHorizontal: Horizontal1
+  inputNameVertical: Vertical1
 --- !u!1 &1100775164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,7 +2258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573717433}
   m_LocalRotation: {x: -0, y: -0, z: 0.08715578, w: 0.9961947}
-  m_LocalPosition: {x: -2.94, y: 7.3, z: -28.23}
+  m_LocalPosition: {x: -2.94, y: 7.3, z: -28.44}
   m_LocalScale: {x: 20, y: 8, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2404,6 +2437,9 @@ MonoBehaviour:
   airMinSpeed: 7
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
+  dashSpeed: 0
+  dashSpeedChangeFactor: 0
+  maxYSpeed: 0
   groundDrag: 4
   jumpForce: 12
   jumpCooldown: 0.25
@@ -2431,6 +2467,7 @@ MonoBehaviour:
   vaulting: 0
   freeze: 0
   unlimited: 0
+  dashing: 0
   restricted: 0
 --- !u!54 &1623759174
 Rigidbody:
