@@ -310,7 +310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66322403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.205, y: -0.243, z: -0.45999908}
+  m_LocalPosition: {x: -0.205, y: -0.243, z: -0.13}
   m_LocalScale: {x: 0.125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -633,7 +633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261379157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.012, y: -0.319, z: -0.45999908}
+  m_LocalPosition: {x: -0.012, y: -0.319, z: -0.13}
   m_LocalScale: {x: 0.125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -952,7 +952,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749152698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.06550007, y: -0.039, z: -0.45999908}
+  m_LocalPosition: {x: -0.06550007, y: -0.039, z: -0.17}
   m_LocalScale: {x: 0.125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -986,7 +986,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874390064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.364, y: 0.25, z: -0.45999908}
+  m_LocalPosition: {x: 0.364, y: 0.25, z: -0.13}
   m_LocalScale: {x: 0.125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1244,7 +1244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928582778}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.35750005, y: -0.37100002, z: -0.45999908}
+  m_LocalPosition: {x: -0.35750005, y: -0.37100002, z: -0.13}
   m_LocalScale: {x: 0.125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1703,7 +1703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278960035}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.191, y: 0.093, z: -0.45999908}
+  m_LocalPosition: {x: 0.191, y: 0.093, z: -0.13}
   m_LocalScale: {x: 0.125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   maxWallRunTime: 4
   jumpKey: 331
   upwardsRunKey: 337
-  downwardsRunKey: 332
+  downwardsRunKey: 336
   inputNameHorizontal: Horizontal2
   inputNameVertical: Vertical2
   wallCheckDistance: 0.7
@@ -2576,7 +2576,7 @@ GameObject:
   - component: {fileID: 1796692346}
   - component: {fileID: 1796692345}
   - component: {fileID: 1796692344}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Wall-Climb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3068,7 +3068,7 @@ GameObject:
   - component: {fileID: 2092304702}
   - component: {fileID: 2092304701}
   - component: {fileID: 2092304700}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Wall-Climb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
