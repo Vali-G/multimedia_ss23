@@ -2281,6 +2281,7 @@ GameObject:
   - component: {fileID: 1623759170}
   - component: {fileID: 1623759169}
   - component: {fileID: 1623759168}
+  - component: {fileID: 1623759176}
   m_Layer: 6
   m_Name: Player2
   m_TagString: Untagged
@@ -2437,9 +2438,9 @@ MonoBehaviour:
   airMinSpeed: 7
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
-  dashSpeed: 0
-  dashSpeedChangeFactor: 0
-  maxYSpeed: 0
+  dashSpeed: 15
+  dashSpeedChangeFactor: 20
+  maxYSpeed: 10
   groundDrag: 4
   jumpForce: 12
   jumpCooldown: 0.25
@@ -2503,6 +2504,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1623759176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623759167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b2eaf6adc70964689ff422d4044c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 351986450}
+  playerCam: {fileID: 1941902709}
+  dashForce: 15
+  dashUpwardForce: 0
+  maxDashYSpeed: 10
+  dashDuration: 0.5
+  cam: {fileID: 1941902708}
+  dashFov: 95
+  useCameraForward: 1
+  allowAllDirections: 1
+  disableGravity: 1
+  resetVel: 1
+  dashCd: 2
+  dashKey: 330
+  inputNameHorizontal: Horizontal2
+  inputNameVertical: Vertical2
 --- !u!1 &1723213088
 GameObject:
   m_ObjectHideFlags: 0
