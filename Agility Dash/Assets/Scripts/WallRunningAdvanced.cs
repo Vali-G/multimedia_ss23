@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallRunning : MonoBehaviour
+public class WallRunningAdvanced : MonoBehaviour
 {
     [Header("Wallrunning")]
     public LayerMask whatIsWall;
@@ -10,11 +10,16 @@ public class WallRunning : MonoBehaviour
     public float wallRunForce;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
+    public float wallClimbSpeed;
     public float maxWallRunTime;
     private float wallRunTimer;
 
     [Header("Input")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode upwardsRunKey = KeyCode.LeftShift;
+    public KeyCode downwardsRunKey = KeyCode.LeftControl;
+    private bool upwardsRunning;
+    private bool downwardsRunning;
     [SerializeField] private string inputNameHorizontal;
     [SerializeField] private string inputNameVertical;
     float horizontalInput;
@@ -63,7 +68,7 @@ public class WallRunning : MonoBehaviour
             WallRunningMovement();
     }
 
-    private void CheckForWall() 
+    private void CheckForWall()
     {
         wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallhit, wallCheckDistance, whatIsWall);
         wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallhit, wallCheckDistance, whatIsWall);
@@ -80,19 +85,19 @@ public class WallRunning : MonoBehaviour
         horizontalInput = Input.GetAxisRaw(inputNameHorizontal);
         verticalInput = Input.GetAxisRaw(inputNameVertical);
 
+        upwardsRunning = Input.GetKey(upwardsRunKey);
+        downwardsRunning = Input.GetKey(downwardsRunKey);
+
         // State 1 - Wallrunning
         if((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
         {
             if (!pm.wallrunning)
-            {
                 StartWallRun();
-            }
 
             // wallrun timer
             if (wallRunTimer > 0)
-            {
                 wallRunTimer -= Time.deltaTime;
-            }
+
             if(wallRunTimer <= 0 && pm.wallrunning)
             {
                 exitingWall = true;
@@ -115,7 +120,6 @@ public class WallRunning : MonoBehaviour
             if (exitWallTimer <= 0)
                 exitingWall = false;
         }
-
 
         // State 3 - None
         else
@@ -144,6 +148,7 @@ public class WallRunning : MonoBehaviour
         rb.useGravity = useGravity;
 
         Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
         if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
@@ -151,6 +156,12 @@ public class WallRunning : MonoBehaviour
 
         // forward force
         rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
+
+        // upwards/downwards force
+        if (upwardsRunning)
+            rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
+        if (downwardsRunning)
+            rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
 
         // push to wall force
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
@@ -164,6 +175,8 @@ public class WallRunning : MonoBehaviour
     private void StopWallRun()
     {
         pm.wallrunning = false;
+
+        // reset camera effects
         cam.DoFov(80f);
         cam.DoTilt(0f);
     }

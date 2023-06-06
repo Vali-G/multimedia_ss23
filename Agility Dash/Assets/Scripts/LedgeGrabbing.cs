@@ -10,10 +10,6 @@ public class LedgeGrabbing : MonoBehaviour
     public Transform cam;
     public Rigidbody rb;
 
-    [Header("Input")]
-    [SerializeField] private string inputNameHorizontal;
-    [SerializeField] private string inputNameVertical;
-
     [Header("Ledge Grabbing")]
     public float moveToLedgeSpeed;
     public float maxLedgeGrabDistance;
@@ -43,7 +39,7 @@ public class LedgeGrabbing : MonoBehaviour
     public float exitLedgeTime;
     private float exitLedgeTimer;
 
-    private void Update() 
+    private void Update()
     {
         LedgeDetection();
         SubStateMachine();
@@ -51,9 +47,8 @@ public class LedgeGrabbing : MonoBehaviour
 
     private void SubStateMachine()
     {
-        // Getting Inputs
-        float horizontalInput = Input.GetAxisRaw(inputNameHorizontal);
-        float verticalInput = Input.GetAxisRaw(inputNameVertical);
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
         bool anyInputKeyPressed = horizontalInput != 0 || verticalInput != 0;
 
         // SubState 1 - Holding onto ledge
@@ -76,7 +71,7 @@ public class LedgeGrabbing : MonoBehaviour
         }
     }
 
-    private void LedgeDetection() 
+    private void LedgeDetection()
     {
         bool ledgeDetected = Physics.SphereCast(transform.position, ledgeSphereCastRadius, cam.forward, out ledgeHit, ledgeDetectionLength, whatIsLedge);
 
@@ -93,10 +88,7 @@ public class LedgeGrabbing : MonoBehaviour
     {
         ExitLedgeHold();
 
-        //Invoke(nameof(DelayedJumpForce), 0.05f);
-        Vector3 forceToAdd = cam.forward * ledgeJumpForwardForce + orientation.up * ledgeJumpUpwardForce;
-        rb.velocity = Vector3.zero;
-        rb.AddForce(forceToAdd, ForceMode.Impulse);
+        Invoke(nameof(DelayedJumpForce), 0.05f);
     }
 
     private void DelayedJumpForce()
@@ -106,7 +98,7 @@ public class LedgeGrabbing : MonoBehaviour
         rb.AddForce(forceToAdd, ForceMode.Impulse);
     }
 
-    private void EnterLedgeHold() 
+    private void EnterLedgeHold()
     {
         holding = true;
 
@@ -145,7 +137,7 @@ public class LedgeGrabbing : MonoBehaviour
         if (distanceToLedge > maxLedgeGrabDistance) ExitLedgeHold();
     }
 
-    private void ExitLedgeHold() 
+    private void ExitLedgeHold()
     {
         exitingLedge = true;
         exitLedgeTimer = exitLedgeTime;

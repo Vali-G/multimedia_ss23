@@ -15,32 +15,27 @@ public class PlayerCam : MonoBehaviour
     public Transform orientation;
     public Transform camHolder;
 
-
     float xRotation;
     float yRotation;
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //get Mouse input
+        // get mouse input
         float mouseX = Input.GetAxisRaw(inputMouseX) * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw(inputMouseY) * Time.deltaTime * sensY;
 
         yRotation += mouseX;
         xRotation -= mouseY;
-
+        
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        //rotate cam and orientation
+        // rotate cam and orientation
         camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }

@@ -1,7 +1,9 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+/// added if(pm.wallrunning) return;
 
 public class Sliding : MonoBehaviour
 {
@@ -10,8 +12,6 @@ public class Sliding : MonoBehaviour
     public Transform playerObj;
     private Rigidbody rb;
     private PlayerMovementAdvanced pm;
-    [SerializeField] private string inputNameHorizontal;
-    [SerializeField] private string inputNameVertical;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -23,8 +23,11 @@ public class Sliding : MonoBehaviour
 
     [Header("Input")]
     public KeyCode slideKey = KeyCode.LeftControl;
+    [SerializeField] private string inputNameHorizontal;
+    [SerializeField] private string inputNameVertical;
     private float horizontalInput;
     private float verticalInput;
+
 
     private void Start()
     {
@@ -54,6 +57,8 @@ public class Sliding : MonoBehaviour
 
     private void StartSlide()
     {
+        if (pm.wallrunning) return;
+
         pm.sliding = true;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
