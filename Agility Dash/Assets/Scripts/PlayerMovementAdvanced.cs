@@ -22,11 +22,12 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     public float groundDrag;
 
-    //Dash and Grappling Stuff
+    //Dash Stuff
     public float dashSpeed;
     public float dashSpeedChangeFactor;
-
     public float maxYSpeed;
+
+    public float swingSpeed;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -87,11 +88,15 @@ public class PlayerMovementAdvanced : MonoBehaviour
         crouching,
         sliding,
         dashing,
-        air
+        air,
+        grappling,
+        swinging
     }
 
 
     public bool activeGrapple;
+    public bool swinging;
+
     public bool sliding;
     public bool crouching;
     public bool wallrunning;
@@ -180,8 +185,20 @@ public class PlayerMovementAdvanced : MonoBehaviour
     private bool keepMomentum;
     private void StateHandler()
     {
+        // Mode - Grappling
+        if (activeGrapple)
+        {
+            state = MovementState.grappling;
+            moveSpeed = sprintSpeed;
+        }
+        // Mode - Swinging
+        else if (swinging)
+        {
+            state = MovementState.swinging;
+            moveSpeed = swingSpeed;
+        }
         // Mode - Dashing
-        if (dashing)
+        else if (dashing)
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed;
@@ -343,6 +360,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
     private void MovePlayer()
     {
         if (restricted) return;
+        //swinging
+        if (swinging) return;
         //Grappling Stuff
         if (activeGrapple) return;
         //Dashing Stuff
@@ -377,6 +396,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void SpeedControl()
     {
+        if(activeGrapple) return;
         // limiting speed on slope
         if (OnSlope() && !exitingSlope)
         {
@@ -505,6 +525,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public void ResetRestrictions()
     {
         activeGrapple = false;
-        cam.DoFov(85f);
+        cam.DoFov(80f);
     }
 }

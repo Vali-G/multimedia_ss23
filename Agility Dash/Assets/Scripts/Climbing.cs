@@ -44,6 +44,11 @@ public class Climbing : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    [Header("Input")]
+    [SerializeField] private string inputNameVertical;
+    float verticalInput;
+
+
     private void Start()
     {
         lg = GetComponent<LedgeGrabbing>();
@@ -59,6 +64,7 @@ public class Climbing : MonoBehaviour
 
     private void StateMachine()
     {
+        verticalInput = Input.GetAxisRaw(inputNameVertical);
         // State 0 - Ledge Grabbing
         if (lg.holding)
         {
@@ -68,7 +74,7 @@ public class Climbing : MonoBehaviour
         }
         
         // State 1 - Climbing
-        else if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
+        else if (wallFront && verticalInput == 1 && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
             if (!climbing && climbTimer > 0) StartClimbing();
 

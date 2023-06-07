@@ -7,6 +7,7 @@ public class Grappling : MonoBehaviour
     [Header("References")]
     private PlayerMovementAdvanced pm;
     public Transform cam;
+    public PlayerCam camFOV;
     public Transform gunTip;
     public LayerMask whatIsGrappleable;
     public LineRenderer lr;
@@ -42,13 +43,15 @@ public class Grappling : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (grappling)
-           lr.SetPosition(0, gunTip.position);
+        //if (grappling)
+           //lr.SetPosition(0, gunTip.position);
     }
 
     private void StartGrapple()
     {
         if (grapplingCdTimer > 0) return;
+
+        GetComponent<Swinging>().StopSwing();
 
         grappling = true;
 
@@ -68,8 +71,8 @@ public class Grappling : MonoBehaviour
             Invoke(nameof(StopGrapple), grappleDelayTime);
         }
 
-        lr.enabled = true;
-        lr.SetPosition(1, grapplePoint);
+        //lr.enabled = true;
+        //lr.SetPosition(1, grapplePoint);
     }
 
     private void ExecuteGrapple()
@@ -96,7 +99,9 @@ public class Grappling : MonoBehaviour
 
         grapplingCdTimer = grapplingCd;
 
-        lr.enabled = false;
+        //lr.enabled = false;
+
+        camFOV.DoFov(80);
     }
 
     public bool IsGrappling()
