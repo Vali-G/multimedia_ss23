@@ -189,13 +189,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
         if (activeGrapple)
         {
             state = MovementState.grappling;
-            moveSpeed = sprintSpeed;
+            desiredMoveSpeed = sprintSpeed;
         }
         // Mode - Swinging
         else if (swinging)
         {
             state = MovementState.swinging;
-            moveSpeed = swingSpeed;
+            desiredMoveSpeed = swingSpeed;
         }
         // Mode - Dashing
         else if (dashing)
