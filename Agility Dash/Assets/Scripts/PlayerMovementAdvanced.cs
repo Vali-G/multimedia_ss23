@@ -20,12 +20,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
 
+    public float groundDrag;
+
+    //Dash and Grappling Stuff
     public float dashSpeed;
     public float dashSpeedChangeFactor;
 
     public float maxYSpeed;
-
-    public float groundDrag;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -58,6 +59,12 @@ public class PlayerMovementAdvanced : MonoBehaviour
     [Header("References")]
     public Climbing climbingScript;
 
+    //Grappling Stuff
+    [Header("Camera Effects")]
+    public PlayerCam cam;
+    public float grappleFov = 95f;
+
+
     public Transform orientation;
 
     float horizontalInput;
@@ -83,6 +90,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
         air
     }
 
+
+    public bool activeGrapple;
     public bool sliding;
     public bool crouching;
     public bool wallrunning;
@@ -95,6 +104,9 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public bool dashing;
     
     public bool restricted;
+
+    public TextMeshProUGUI text_speed;
+    public TextMeshProUGUI text_mode;
 
     private void Start()
     {
@@ -114,9 +126,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
+        TextStuff();
 
         // handle drag
-        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
+        //if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
+        if(grounded && !activeGrapple && state != MovementState.dashing)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
@@ -160,7 +174,9 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
     }
 
+    //Grappling Stuff
     private MovementState lastState;
+
     private bool keepMomentum;
     private void StateHandler()
     {
@@ -252,14 +268,18 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
             if (moveSpeed < airMinSpeed)
                 desiredMoveSpeed = airMinSpeed;
+
+            /*
             else if (desiredMoveSpeed < sprintSpeed)
                 desiredMoveSpeed = walkSpeed;
             else
                 desiredMoveSpeed = sprintSpeed;
+            */
         }
 
         bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
 
+        //Dashing Stuff
         if (lastState == MovementState.dashing) keepMomentum = true;
 
         if (desiredMoveSpeedHasChanged)
@@ -271,7 +291,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
             }
             else
             {
-                StopAllCoroutines();
+                //StopAllCoroutines();
                 moveSpeed = desiredMoveSpeed;
             }
         }
@@ -290,10 +310,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
         float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
+        float startTime = Time.time;
 
         float boostFactor = speedChangeFactor;
 
-        while (time < difference)
+        while (time < difference && Mathf.Abs(startTime - Time.time) < 3)
         {
             moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
 
@@ -303,6 +324,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
                 float slopeAngleIncrease = 1 + (slopeAngle / 90f);
 
                 time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
+            }
+            else if(speedChangeFactor == dashSpeedChangeFactor)
+            {
+                time += Time.deltaTime * boostFactor;
             }
             else
                 time += Time.deltaTime * speedIncreaseMultiplier;
@@ -317,9 +342,14 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (state == MovementState.dashing) return;
-        if (climbingScript.exitingWall) return;
         if (restricted) return;
+        //Grappling Stuff
+        if (activeGrapple) return;
+        //Dashing Stuff
+        if (state == MovementState.dashing) return;
+
+        if (climbingScript.exitingWall) return;
+        
 
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -402,5 +432,79 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
+    }
+
+    //Text Display
+    private void TextStuff()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (OnSlope())
+            text_speed.SetText("Speed: " + Round(rb.velocity.magnitude, 1) + " / " + Round(moveSpeed, 1));
+
+        else
+            text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
+
+        text_mode.SetText(state.ToString());
+    }
+
+    public static float Round(float value, int digits)
+    {
+        float mult = Mathf.Pow(10.0f, (float)digits);
+        return Mathf.Round(value * mult) / mult;
+    }
+
+    
+    //Grappling
+
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+    {
+        float gravity = Physics.gravity.y;
+        float displacementY = endPoint.y - startPoint.y;
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) 
+            + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+        return velocityXZ + velocityY;
+    }
+
+
+    private bool enableMovementOnNextTouch;
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+    {
+        activeGrapple = true;
+
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+        Invoke(nameof(SetVelocity), 0.1f);
+
+        Invoke(nameof(ResetRestrictions), 3f);
+    }
+
+    private Vector3 velocityToSet;
+    private void SetVelocity()
+    {
+        enableMovementOnNextTouch = true;
+        rb.velocity = velocityToSet;
+
+        cam.DoFov(grappleFov);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (enableMovementOnNextTouch)
+        {
+            enableMovementOnNextTouch = false;
+            ResetRestrictions();
+
+            GetComponent<Grappling>().StopGrapple();
+        }
+    }
+
+    public void ResetRestrictions()
+    {
+        activeGrapple = false;
+        cam.DoFov(85f);
     }
 }

@@ -16,10 +16,10 @@ TagManager:
   - 
   - 
   - whatIsGround
-  - whatIsWall
+  - whatIsRunningWall
   - whatIsLedge
-  - 
-  - 
+  - whatIsGrappable
+  - climbableWall
   - 
   - 
   - 

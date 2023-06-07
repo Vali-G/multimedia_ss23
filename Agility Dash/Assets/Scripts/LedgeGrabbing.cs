@@ -104,7 +104,7 @@ public class LedgeGrabbing : MonoBehaviour
 
         pm.unlimited = true;
         pm.restricted = true;
-
+        
         currLedge = ledgeHit.transform;
         lastLedge = ledgeHit.transform;
 
