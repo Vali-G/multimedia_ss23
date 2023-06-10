@@ -6,7 +6,7 @@ using TMPro;
 public class GameControllerJR : MonoBehaviour
 {
 
-    [Header("Refferences")]
+    [Header("References")]
     public GameObject startBoundaries;
     public Timer timer;
     public Transform PosPlayer1;
