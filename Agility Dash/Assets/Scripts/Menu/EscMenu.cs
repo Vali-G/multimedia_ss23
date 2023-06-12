@@ -66,7 +66,7 @@ public class EscMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("Hub");
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
