@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Agility Dash/Assets/Materials/Selfmade/GlassDark.mat.meta
 guid: d76243b3d20e52f488510a16c3dd85f1
+========
+guid: e835a33db37679f4a9899ce88992420a
+>>>>>>>> Hub-Creation:Agility Dash/Assets/Materials/Images/Materials/ControllerSettings 2.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

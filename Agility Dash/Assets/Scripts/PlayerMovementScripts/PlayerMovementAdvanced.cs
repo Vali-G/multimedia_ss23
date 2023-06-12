@@ -418,8 +418,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
 
         // limit y vel
-        if (maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
-            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);
+        /*if (maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
+            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);*/
     }
 
     private void Jump()

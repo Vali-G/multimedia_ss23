@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Agility Dash/Assets/Materials/Selfmade/GlassBlue.mat.meta
 guid: 50b443c8c81ecda4389e28b49ea55e85
+========
+guid: b63428694635b1d46abcfe1f62eec7ba
+>>>>>>>> Hub-Creation:Agility Dash/Assets/Materials/Images/Materials/ControllerSettings 1.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
