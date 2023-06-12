@@ -58,8 +58,8 @@ public class ChangePlayerController : MonoBehaviour
         player2.SetActive(toggleStatePlayer2);
         player2Cam.SetActive(toggleStatePlayer2);
 
-        controllerSign.SetActive(toogleStatePlayer1);
-        keyboardSign.SetActive(toggleStatePlayer2);
+        //controllerSign.SetActive(toogleStatePlayer1);
+        //keyboardSign.SetActive(toggleStatePlayer2);
 
         controlsAreChanging = false;
     }
