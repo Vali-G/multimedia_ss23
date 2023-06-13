@@ -61,8 +61,8 @@ public class ChangePlayerController : MonoBehaviour
 
         sfxPlaying.Play();
 
-        //controllerSign.SetActive(toogleStatePlayer1);
-        //keyboardSign.SetActive(toggleStatePlayer2);
+        controllerSign.SetActive(!toogleStatePlayer1);
+        keyboardSign.SetActive(!toggleStatePlayer2);
 
         controlsAreChanging = false;
     }
