@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class EscMenu : MonoBehaviour
@@ -17,6 +18,10 @@ public class EscMenu : MonoBehaviour
     public GameObject HUD;
     public TextMeshProUGUI countdownDisplay;
     public TextMeshProUGUI timer;
+    public KeyCode pauseKey = KeyCode.Escape;
+    public KeyCode altPauseKey;
+
+    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
 
 
     // Start is called before the first frame update
@@ -29,7 +34,7 @@ public class EscMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !gameController.gameOver)
+        if ((Input.GetKeyDown(pauseKey) || Input.GetKeyDown(altPauseKey)) && !gameController.gameOver)
         {
             if(GameIsPaused)
             {
@@ -61,6 +66,9 @@ public class EscMenu : MonoBehaviour
         Cursor.visible = true;
         HUD.SetActive(false);
 
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+
 
     }
 
@@ -81,12 +89,16 @@ public class EscMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
 
     public void closeSettings()
     {
         pauseMenuUI.SetActive(true);
         settingsMenuUI.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
     }
 
     
