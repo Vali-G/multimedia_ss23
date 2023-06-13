@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
 
 public class WinningScreen : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class WinningScreen : MonoBehaviour
     public GameObject winningScreenUI;
     public bool GameIsPaused = false;
     public GameControllerJR gameController;
+    public GameObject winFirstButton;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,8 @@ public class WinningScreen : MonoBehaviour
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(winFirstButton);
     }
 
     public void BackToHub()
