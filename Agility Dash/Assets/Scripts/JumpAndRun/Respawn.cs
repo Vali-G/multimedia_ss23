@@ -13,6 +13,9 @@ public class Respawn : MonoBehaviour
     public LayerMask whatIsLava;
     public bool respawn;
 
+    [Header("Audio")]
+    public SFXPlayingJR sfxPlaying;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,7 @@ public class Respawn : MonoBehaviour
         if(respawn)
         {
             transform.position = spawnPoint.position;
+            sfxPlaying.PlayRespawnSound();
         }
     }
 }
