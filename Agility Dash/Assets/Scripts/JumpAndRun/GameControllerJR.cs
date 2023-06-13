@@ -18,6 +18,9 @@ public class GameControllerJR : MonoBehaviour
     public GameObject HUD;
     public bool gameOver;
 
+    [Header("Audio")]
+    public SFXPlayingJR sfxPlaying;
+
     private bool wonP1;
     private bool wonP2;
 
@@ -37,10 +40,12 @@ public class GameControllerJR : MonoBehaviour
         if(wonP1)
         {
             EndGame("Player 1");
+            sfxPlaying.PlayWonGameSound();
         }
         else if(wonP2)
         {
             EndGame("Player 2");
+            sfxPlaying.PlayWonGameSound();
         }
     
     }
@@ -49,6 +54,7 @@ public class GameControllerJR : MonoBehaviour
     {
         startBoundaries.SetActive(false);
         timer.StartTimer();
+        sfxPlaying.PlayBeginGameSound();
     }
 
     private void checkForWin()
