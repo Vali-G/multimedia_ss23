@@ -23034,7 +23034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1603798969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26754,7 +26754,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.94509804, g: 0.05882353, b: 0.05882353, a: 0.19215687}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.44313726}
-    m_SelectedColor: {r: 0.003921569, g: 0.047058824, b: 0.99215686, a: 1}
+    m_SelectedColor: {r: 0.003921569, g: 0.047058824, b: 0.99215686, a: 0.19215687}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -27817,6 +27817,7 @@ MonoBehaviour:
   timer: {fileID: 1908068548}
   pauseKey: 27
   altPauseKey: 339
+  music: {fileID: 1378015688}
   pauseFirstButton: {fileID: 962497346}
   optionsFirstButton: {fileID: 823130564}
   optionsClosedButton: {fileID: 2018699700}
@@ -27851,7 +27852,8 @@ MonoBehaviour:
   winningScreenUI: {fileID: 1603798968}
   GameIsPaused: 0
   gameController: {fileID: 1938846635}
-  winFirstButton: {fileID: 1980909482}
+  winFirstButton: {fileID: 1848846092}
+  music: {fileID: 1378015688}
 --- !u!1 &1938846632
 GameObject:
   m_ObjectHideFlags: 0
@@ -28691,7 +28693,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.94509804, g: 0.05882353, b: 0.05882353, a: 0.19215687}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.44313726}
-    m_SelectedColor: {r: 0.003921569, g: 0.047058824, b: 0.99215686, a: 1}
+    m_SelectedColor: {r: 0.003921569, g: 0.047058824, b: 0.99215686, a: 0.19215687}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

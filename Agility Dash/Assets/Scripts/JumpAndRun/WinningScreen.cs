@@ -12,6 +12,7 @@ public class WinningScreen : MonoBehaviour
     public bool GameIsPaused = false;
     public GameControllerJR gameController;
     public GameObject winFirstButton;
+    public AudioSource music;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class WinningScreen : MonoBehaviour
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        music.Stop();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(winFirstButton);
     }

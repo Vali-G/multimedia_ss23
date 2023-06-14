@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SFXPlaying : MonoBehaviour
 {
-    public AudioSource audio;
+    public AudioSource audioAll;
 
     public void Play()
     {
-        audio.Play();
+        audioAll.Play();
     }
 }
