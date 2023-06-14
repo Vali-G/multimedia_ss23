@@ -24596,6 +24596,8 @@ MonoBehaviour:
   pauseKey: 27
   altPauseKey: 339
   music: {fileID: 489998202}
+  videoJrPlayer: {fileID: 1683118372}
+  videoPlayerScript: {fileID: 609013139}
   pauseFirstButton: {fileID: 584664770}
   optionsFirstButton: {fileID: 2143314403}
   optionsClosedButton: {fileID: 1308078853}
