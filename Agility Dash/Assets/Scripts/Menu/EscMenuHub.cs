@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
+
 
 
 public class EscMenuHub : MonoBehaviour
@@ -18,6 +20,8 @@ public class EscMenuHub : MonoBehaviour
     public KeyCode pauseKey = KeyCode.Escape;
     public KeyCode altPauseKey;
     public AudioSource music;
+    public VideoPlayer videoJrPlayer;
+    public StartStopVideo videoPlayerScript;
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
 
@@ -54,6 +58,10 @@ public class EscMenuHub : MonoBehaviour
         Cursor.visible = false;
         HUD.SetActive(true);
         music.Play();
+        if (videoPlayerScript.videoPlaying) 
+        {
+            videoJrPlayer.Play();
+        }
     }
 
     void Pause()
@@ -67,6 +75,7 @@ public class EscMenuHub : MonoBehaviour
         music.Pause();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+        videoJrPlayer.Pause();
     }
 
     public void LoadMenu()
