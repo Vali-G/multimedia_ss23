@@ -17,6 +17,7 @@ public class EscMenuHub : MonoBehaviour
     public GameObject HUD;
     public KeyCode pauseKey = KeyCode.Escape;
     public KeyCode altPauseKey;
+    public AudioSource music;
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
 
@@ -52,6 +53,7 @@ public class EscMenuHub : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         HUD.SetActive(true);
+        music.Play();
     }
 
     void Pause()
@@ -62,11 +64,9 @@ public class EscMenuHub : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         HUD.SetActive(false);
-
+        music.Pause();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-
-
     }
 
     public void LoadMenu()

@@ -27818,6 +27818,7 @@ MonoBehaviour:
   pauseKey: 27
   altPauseKey: 339
   music: {fileID: 1378015688}
+  sfx: {fileID: 1949218376}
   pauseFirstButton: {fileID: 962497346}
   optionsFirstButton: {fileID: 823130564}
   optionsClosedButton: {fileID: 2018699700}
