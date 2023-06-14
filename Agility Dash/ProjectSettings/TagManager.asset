@@ -33,8 +33,8 @@ TagManager:
   - whatIsTeleporterJR
   - whatIsTeleporterCatch
   - whatIsTeleporterPuzzle
-  - 
-  - 
+  - WhatIsVideoButton
+  - WhatIsButton
   - whatIsGoal
   - whatIsLava
   m_SortingLayers:

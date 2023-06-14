@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
 
 public class Teleport : MonoBehaviour
 {
     [Header("Reference")]
     public LayerMask whatIsTeleporter;
-    public Transform player;
+    public Transform player1;
+    public Transform player2;
     public JoinLevel joinScreenCanvas;
     public GameObject levelJoinScreen;
     public GameObject HUD;
     public bool joinLevel;
+    public GameObject joinLevelFirstButton;
 
     [Header("Detection")]
     public float teleporterCheckDistance;
@@ -40,7 +44,7 @@ public class Teleport : MonoBehaviour
 
     private void CheckForTeleporter()
     {
-        teleporter = Physics.Raycast(player.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter);
+        teleporter = Physics.Raycast(player1.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter) || Physics.Raycast(player2.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter);
     }
 
     private void AskToJoinLevel()
@@ -57,6 +61,8 @@ public class Teleport : MonoBehaviour
         joinScreenCanvas.gameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(joinLevelFirstButton);
     }
 
     public void Join()

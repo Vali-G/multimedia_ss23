@@ -9,8 +9,6 @@ public class JoinLevel : MonoBehaviour
     public GameObject joinLevelCatchScreenUI;
     public GameObject joinLevelPuzzleScreenUI;
     public Teleport teleporterJR;
-    public Teleport teleporterCatch;
-    public Teleport teleporterPuzzle;
     public GameObject HUD;
     public bool gameIsPaused = false;
 
@@ -24,8 +22,6 @@ public class JoinLevel : MonoBehaviour
         joinLevelPuzzleScreenUI.SetActive(false);
         HUD.SetActive(true);
         teleporterJR.joinLevel = false;
-        teleporterCatch.joinLevel = false;
-        teleporterPuzzle.joinLevel = false;
         gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -35,7 +31,5 @@ public class JoinLevel : MonoBehaviour
     private void EnableTeleporter() 
     {
         teleporterJR.enabled = true;
-        teleporterCatch.enabled = true;
-        teleporterPuzzle.enabled = true;
     }
 }
