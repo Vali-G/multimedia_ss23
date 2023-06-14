@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 20d6b9a4998185a4d96701df2c37297d
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/Scenes/JumpAndRun.unity
     guid: 0c0775b938d545e42b43c34ff5b74c64
   - enabled: 1
