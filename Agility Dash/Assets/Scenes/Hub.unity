@@ -3078,7 +3078,7 @@ MonoBehaviour:
   dashSpeedChangeFactor: 20
   maxYSpeed: 10
   swingSpeed: 17
-  jumpForce: 16
+  jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
   crouchSpeed: 3.5
@@ -15643,6 +15643,7 @@ MonoBehaviour:
   teleporterCheckDistance: 0.7
   playerHeight: 2
   newScene: JumpAndRun
+  isTeleporter: 0
 --- !u!1 &1259715886
 GameObject:
   m_ObjectHideFlags: 0
@@ -24601,6 +24602,7 @@ MonoBehaviour:
   pauseFirstButton: {fileID: 584664770}
   optionsFirstButton: {fileID: 2143314403}
   optionsClosedButton: {fileID: 1308078853}
+  teleporter: {fileID: 1244271217}
 --- !u!114 &1686638306
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ public class EscMenuHub : MonoBehaviour
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
 
+    public Teleport teleporter;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +38,7 @@ public class EscMenuHub : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(pauseKey) || Input.GetKeyDown(altPauseKey)))
+        if ((Input.GetKeyDown(pauseKey) || Input.GetKeyDown(altPauseKey)) && !(teleporter.isTeleporter))
         {
             if(GameIsPaused)
             {

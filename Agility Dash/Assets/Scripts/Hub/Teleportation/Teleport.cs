@@ -23,7 +23,7 @@ public class Teleport : MonoBehaviour
     public float playerHeight;
     public string newScene; 
 
-    private bool teleporter;
+    public bool isTeleporter;
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class Teleport : MonoBehaviour
     {
         CheckForTeleporter();
 
-        if (teleporter)
+        if (isTeleporter)
             AskToJoinLevel();
 
         if (joinLevel && !joinScreenCanvas.gameIsPaused)
@@ -44,7 +44,7 @@ public class Teleport : MonoBehaviour
 
     private void CheckForTeleporter()
     {
-        teleporter = Physics.Raycast(player1.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter) || Physics.Raycast(player2.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter);
+        isTeleporter = Physics.Raycast(player1.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter) || Physics.Raycast(player2.position, Vector3.left, playerHeight * 0.5f + 0.2f, whatIsTeleporter);
     }
 
     private void AskToJoinLevel()
