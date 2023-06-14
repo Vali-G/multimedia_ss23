@@ -147,8 +147,6 @@ public class Climbing : MonoBehaviour
         if (pm.grounded) return;
         if (lg.holding || lg.exitingLedge) return;
 
-        print("climbjump");
-
         exitingWall = true;
         exitWallTimer = exitWallTime;
 

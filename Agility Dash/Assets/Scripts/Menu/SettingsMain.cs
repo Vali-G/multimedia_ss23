@@ -14,7 +14,6 @@ public class SettingsMain : MonoBehaviour
 
     private void Start() {
         audioMixer.GetFloat("volume", out float volume);
-        Debug.Log(volume);
         settings.GetComponent<Slider>().value = volume; 
     }
 
