@@ -24595,6 +24595,7 @@ MonoBehaviour:
   HUD: {fileID: 2061651323}
   pauseKey: 27
   altPauseKey: 339
+  music: {fileID: 489998202}
   pauseFirstButton: {fileID: 584664770}
   optionsFirstButton: {fileID: 2143314403}
   optionsClosedButton: {fileID: 1308078853}
